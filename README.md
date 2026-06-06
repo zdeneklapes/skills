@@ -15,18 +15,16 @@ A small collection of agent skills installable with the `skills` CLI and discove
 Install all skills from this repository:
 
 ```bash
-npx skills add <owner>/<repo>
+npx skills add zdeneklapes/skills
 ```
 
 Install one skill by name:
 
 ```bash
-npx skills add <owner>/<repo> --skill vertical-slice-architecture
-npx skills add <owner>/<repo> --skill simplify-code
-npx skills add <owner>/<repo> --skill shell-skill
+npx skills add zdeneklapes/skills --skill vertical-slice-architecture
+npx skills add zdeneklapes/skills --skill simplify-code
+npx skills add zdeneklapes/skills --skill shell-skill
 ```
-
-Replace `<owner>/<repo>` with the GitHub repository path after publishing.
 
 ## Local Validation
 
