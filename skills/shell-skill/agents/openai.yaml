@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shell Skill"
+  short_description: "Write explicit env-driven shell scripts"
+  default_prompt: "Use $shell-skill to write or review shell scripts in this repository."

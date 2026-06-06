@@ -6,6 +6,7 @@ A small collection of agent skills installable with the `skills` CLI and discove
 
 | Skill | Description |
 |---|---|
+| [shell-skill](skills/shell-skill) | Write and review explicit env-driven shell scripts, cron scripts, and helper wrappers. |
 | [simplify-code](skills/simplify-code) | Refactor recently changed or targeted code for clarity while preserving behavior. |
 | [vertical-slice-architecture](skills/vertical-slice-architecture) | Design, review, refactor, or implement backend, full-stack, and machine learning systems using Vertical Slice Architecture. |
 
@@ -22,6 +23,7 @@ Install one skill by name:
 ```bash
 npx skills add <owner>/<repo> --skill vertical-slice-architecture
 npx skills add <owner>/<repo> --skill simplify-code
+npx skills add <owner>/<repo> --skill shell-skill
 ```
 
 Replace `<owner>/<repo>` with the GitHub repository path after publishing.
@@ -39,6 +41,7 @@ Install one skill locally for Codex:
 ```bash
 npx skills add . --skill vertical-slice-architecture -a codex -g
 npx skills add . --skill simplify-code -a codex -g
+npx skills add . --skill shell-skill -a codex -g
 ```
 
 ## Structure
