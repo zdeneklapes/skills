@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Paper Writing"
+  short_description: "Draft and review peer-ready research papers"
+  default_prompt: "Use $research-paper-writing to draft or review this research paper for peer review."
