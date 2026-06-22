@@ -219,16 +219,30 @@ Use:
 Avoid:
 
 - defensive phrasing,
-- vague hedging,
+- ungrounded hedging,
 - blog-like advice,
 - marketing adjectives,
 - overuse of "important", "useful", "mature", "clearly", "significant",
 - repeated contrast formulas,
 - meta-commentary about how the reader should interpret the text.
 
-## Avoid AI-like formulations
+Do not remove necessary scientific caution. Hedges are allowed when they state uncertainty, scope, or conditions. Tie cautious language to a condition, dataset, metric, workload, threat, or limitation.
 
-Avoid these patterns:
+Prefer:
+
+- "The measured ordering may change across workloads."
+- "This estimate applies to the evaluated datasets."
+- "The conclusion is limited by the sample size and metric definition."
+
+Avoid:
+
+- "The result might be different in some cases."
+- "The method may not always work."
+- "The finding is somewhat uncertain."
+
+## Avoid template and metadiscourse formulations
+
+Avoid patterns that announce importance, novelty, interpretation, or the writer's intent without adding technical content.
 
 - "should not be read as"
 - "should not be interpreted as"
@@ -240,8 +254,35 @@ Avoid these patterns:
 - "still, the controlled test shows"
 - "the main conclusion is not that ... rather ..."
 - "this makes X useful"
+- "in recent years, X has become increasingly important"
+- "X plays a crucial role in ..."
+- "this paper aims to ..."
+- "this study provides valuable insights into ..."
+- "the results clearly demonstrate ..."
+- "it can be observed that ..."
+- "this highlights the importance of ..."
+- "this underscores the need for ..."
+- "this paper fills an important gap ..."
+- "to the best of our knowledge ..."
+- "a comprehensive framework"
+- "a novel approach"
+- "future work could explore ..."
+- "sheds light on ..."
+- "utilize" when "use" is sufficient
+- "leverage" when "use", "apply", or "build on" is more precise
 
 Replace them with direct technical wording.
+
+Replacement rules:
+
+- Replace claims about importance with the concrete mechanism, trend, dependency, or consequence.
+- Replace claims about novelty with the specific difference from prior work.
+- Replace "aims to" with the research action: "measures", "compares", "evaluates", "analyzes", or "models".
+- Replace "insights" with the specific result.
+- Replace "clearly demonstrates" with measured values and scope.
+- Replace "it can be observed that" with references to the evidence, such as "Table 2 reports ..." or "Figure 3 shows ...".
+- Replace broad "gap" claims with the exact missing measurement, method, dataset, or comparison.
+- Replace generic future-work sentences with extensions motivated by a stated limitation.
 
 Examples:
 
