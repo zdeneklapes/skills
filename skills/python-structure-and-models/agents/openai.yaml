@@ -1,4 +1,0 @@
-interface:
-  display_name: "Python Structure and Models"
-  short_description: "Choose Pydantic or dataclasses deliberately"
-  default_prompt: "Use $python-structure-and-models to choose the right Python model type for this code."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Python Development"
+  short_description: "Python coding, testing, and model rules"
+  default_prompt: "Use $python-development when writing, reviewing, testing, or choosing structures for Python code."

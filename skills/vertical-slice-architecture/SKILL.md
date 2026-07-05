@@ -1,6 +1,6 @@
 ---
 name: vertical-slice-architecture
-description: Design, review, refactor, or implement systems using Vertical Slice Architecture. Use when the user asks about feature folders, slice boundaries, layered-to-feature refactors, CQRS, handlers, validators, DTO placement, server/backend architecture, full-stack feature organization, or applying Vertical Slice Architecture to machine learning training, inference, model evaluation, model serving, MLOps, batch scoring, or ML platform codebases.
+description: Use when designing, reviewing, refactoring, or implementing feature or slice boundaries, CQRS handlers, validators, DTO placement, backend/server architecture, full-stack feature organization, or ML training/inference/evaluation/serving/MLOps slices. Do not use for small local cleanup with no architecture or boundary decision.
 ---
 
 # Vertical Slice Architecture

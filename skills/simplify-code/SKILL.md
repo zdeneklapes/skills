@@ -1,6 +1,6 @@
 ---
 name: simplify-code
-description: Use when asked to simplify code, clean up recently changed files, reduce complexity, remove redundant abstractions, improve readability, deslopify generated code, prepare changes for review, or run a /simplify pass while preserving behavior.
+description: Use when simplifying or refactoring existing code for readability, reducing complexity, removing duplication, deslopifying generated code, or preparing changed code for review while preserving behavior. Do not use for new features, behavior changes, or architecture redesign.
 ---
 
 # Simplify Code

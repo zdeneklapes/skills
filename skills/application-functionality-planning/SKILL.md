@@ -1,6 +1,6 @@
 ---
 name: application-functionality-planning
-description: Use when writing, reviewing, or improving application functionality documentation, product requirements, feature checklists, scope constraints, roadmaps, security requirements, authorization rules, permissions, data access rules, non-functional requirements, integrations, telemetry, migrations, or acceptance criteria.
+description: Use when creating, reviewing, or improving application requirements, product scope, feature checklists, permissions, authorization, data access, security, non-functional requirements, integrations, telemetry, migrations, roadmaps, or acceptance criteria. Do not use for code-only implementation work.
 ---
 
 # Application Functionality Requirements Planning Skill

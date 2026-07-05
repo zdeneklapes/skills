@@ -1,9 +1,6 @@
----
-name: python-structure-and-models
-description: Use when choosing between Pydantic models, Python dataclasses, TypedDicts, or plain classes for Python code; reviewing API/config/cache/stats schemas; or deciding where validation, serialization, JSON contracts, and internal runtime state should live.
----
-
 # Python Structure and Models
+
+Read this when choosing between Pydantic models, Python dataclasses, `TypedDict`, or plain classes; reviewing API/config/cache/stats schemas; or deciding where validation, serialization, JSON contracts, and internal runtime state should live.
 
 ## Core Rule
 

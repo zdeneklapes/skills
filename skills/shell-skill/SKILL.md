@@ -1,6 +1,6 @@
 ---
 name: shell-skill
-description: Use when writing or reviewing shell scripts, helper scripts, Docker cron scripts, backup wrappers, or env-file-driven automation in this repository.
+description: Use when writing or reviewing shell scripts, Bash helpers, Docker cron scripts, backup wrappers, env-file-driven automation, or shell-based operational workflows. Do not use for one-off terminal commands unless they are being turned into reusable scripts.
 ---
 
 # Shell Skill

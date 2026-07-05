@@ -1,0 +1,180 @@
+---
+name: python-development
+description: Use when writing, reviewing, refactoring, or testing Python code; choosing Pydantic/dataclass/TypedDict structures; defining Python exceptions; or applying Python naming, branching, typing, pytest, tooling-discovery, or logging conventions. Do not use for non-Python changes.
+---
+
+# Python Development
+
+Use this for reusable Python coding and testing conventions.
+
+First follow the project's own instructions for Python version, execution environment, dependency manager, framework, formatter, linter, type checker, test runner, and command wrappers.
+
+## Structured Data
+
+Use the project's established structured-data patterns.
+
+Avoid broad fixed-shape annotations like `dict[str, Any]`, `dict[str, object]`, or `list[dict[...]]`.
+
+Use:
+
+- Pydantic models when the project already uses Pydantic or the data needs validation, serialization, schema generation, or boundary parsing.
+- Dataclasses for internal runtime/helper data that does not need validation, serialization, or schema behavior.
+- `TypedDict` for plain-dict wire shapes required by third-party APIs.
+- Named type aliases or short comments for genuinely dynamic mappings.
+
+For Pydantic-vs-dataclass-vs-`TypedDict` decisions, read [structure-and-models.md](references/structure-and-models.md).
+
+## Exceptions
+
+Follow the project's existing exception-placement convention.
+
+If no convention exists, define custom exception classes in the nearest domain/package `exceptions.py`.
+
+Avoid defining reusable exception classes inside workflow, loader, API client, factory, type, or utility modules.
+
+## Branching
+
+Use `match`/`case` when the project supports Python 3.10+ and it makes structural branching clearer.
+
+Keep simple priority-ordered guard clauses as `if` statements.
+
+## Reuse Results
+
+If the same function result is needed more than once, call it once, store it in a descriptive variable, and reuse it.
+
+## Closed String Values
+
+When a string accepts only known values, avoid plain `str`.
+
+Prefer an enum for reusable domain values or a `Literal[...]` alias for local closed sets.
+
+## Variable Names
+
+Prefer descriptive names over short abbreviations.
+
+Examples:
+
+```text
+hugging_face_access_token instead of hf_token
+model_identifier instead of model_id
+configuration instead of cfg
+parameters instead of params
+environment instead of env
+```
+
+Exception: keep external API names when matching third-party schemas.
+
+## Comments With References
+
+When adding comments that explain complex problems or non-obvious fixes, include useful URLs close to the implementation.
+
+Use:
+
+```python
+# See: https://example.com/relevant-docs
+# NOTE: Problem described in: https://example.com/issue
+```
+
+Do not add comments that only repeat obvious code.
+
+## Testing Rules
+
+Use the project's test runner and test helpers.
+
+For pytest projects, apply the pytest-specific rules in this section.
+
+### Test Real Behavior
+
+Test core logic and user-visible behavior.
+
+Do not test incidental implementation mechanics such as import side effects, `sys.modules`, import cache state, exact log text, or whether a transitive import happened.
+
+Do not add tests for behavior that is not implemented, removed, or absent from the public surface.
+
+### Use Real Production Types
+
+Use real production types in tests.
+
+Do not create minimal stand-in classes that mimic production models.
+
+If a real type is heavy to construct, use a pytest fixture or factory, not a stripped-down copy.
+
+### Config Fixtures
+
+Do not make tests depend on operational example config files.
+
+When a test needs config data:
+
+- Create temporary config files with `tmp_path` for config-loading behavior.
+- Build production config objects directly for runtime behavior.
+- Use colocated fixtures only when several tests need the same static shape.
+
+### Standalone Scripts
+
+Do not write full unit tests for standalone operational scripts.
+
+Verify scripts with formatting, linting, type checks, CLI help, dry-run checks, or small smoke checks.
+
+### Pytest Fixture Side Effects
+
+Use `@pytest.mark.usefixtures()` for fixtures used only for side effects.
+
+Use a normal fixture parameter only when the test reads the fixture return value.
+
+```python
+@pytest.mark.usefixtures("mock_cuda")
+def test_callback_behavior():
+    ...
+```
+
+This avoids unused-argument lint errors and makes fixture intent clear.
+
+### Logging Tests
+
+Do not test logging internals unless log output is a documented user, audit, compliance, or integration contract.
+
+Do not assert emitted log text, log formatting, log levels, logger names, or logger internals when logs are only diagnostics.
+
+Tests may stub logging only to suppress noise while asserting real behavior.
+
+## Code Quality
+
+Use the project's configured execution, formatting, linting, and type-checking tools.
+
+### Python Execution Environment
+
+Find the project's Python execution environment before running Python commands.
+
+Prefer project-provided commands and docs first: `just`, `make`, scripts, `tox`, `nox`, Docker/Compose, CI config, `README.md`, `AGENTS.md`, or nested agent instructions.
+
+Use the environment manager already present in the project, such as `uv`, Poetry, Hatch, PDM, `tox`, `nox`, an activated virtualenv, container commands, or system Python.
+
+Do not introduce or bypass an environment manager just for convenience.
+
+### Type Checking
+
+Run type checks after type-related changes.
+
+Fix real type mismatches in project code instead of suppressing them.
+
+Use narrow line-level ignores only for dynamic third-party libraries or weak stubs.
+
+Do not disable type rules globally to hide local errors.
+
+Avoid `typing.cast` when possible. Prefer real narrowing with runtime validation, `TypeGuard`, `TypeIs`, protocols, or clearer control flow.
+
+### Linting and Formatting
+
+Use the project's configured formatter and linter.
+
+Use project-specific wrapper commands when the repository defines them.
+
+### Logging Policy
+
+Use the project's logging levels and logger namespaces.
+
+Use `INFO` for operator-relevant lifecycle events, such as before processing starts or when entering a long-running state.
+
+Completion summaries, counts, metrics, config dumps, environment dumps, sample details, and diagnostics should use lower-verbosity levels when the project supports them.
+
+Do not invent manual logging categories when standard logging levels and logger namespaces are enough.

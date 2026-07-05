@@ -1,6 +1,6 @@
 ---
 name: research-paper-writing
-description: Use when drafting, reviewing, rewriting, or polishing a research paper for a conference, workshop, journal, or internal academic review; preparing manuscript sections, claims, citations, methodology, results, figures, tables, threats to validity, anonymized review versions, or camera-ready academic papers.
+description: Use when drafting, reviewing, rewriting, or polishing academic research papers, workshop/journal submissions, manuscript sections, claims, citations, methodology, results, figures, tables, threats to validity, anonymized review versions, or camera-ready text. Do not use for general product docs, blog posts, or code comments.
 ---
 
 # Research Paper Writing Skill
