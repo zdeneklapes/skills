@@ -1,4 +1,0 @@
-interface:
-  display_name: "Application Functionality Planning"
-  short_description: "Plan clear, safe app requirements"
-  default_prompt: "Use $application-functionality-planning to write or review application functionality requirements."
