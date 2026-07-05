@@ -6,6 +6,7 @@ A small collection of agent skills installable with the `skills` CLI and discove
 
 | Skill | Description |
 |---|---|
+| [code-comments-and-documentation](skills/code-comments-and-documentation) | Write self-explaining code with comments, docstrings, and API docs that capture intent, invariants, and contracts. |
 | [project-documentation](skills/project-documentation) | Structure README, AGENTS, MkDocs, requirements, architecture, operations, and plan docs. |
 | [shell-skill](skills/shell-skill) | Write and review explicit env-driven shell scripts, cron scripts, and helper wrappers. |
 | [simplify-code](skills/simplify-code) | Refactor recently changed or targeted code for clarity while preserving behavior. |
@@ -24,6 +25,7 @@ npx skills add zdeneklapes/skills
 Install one skill by name:
 
 ```bash
+npx skills add zdeneklapes/skills --skill code-comments-and-documentation
 npx skills add zdeneklapes/skills --skill project-documentation
 npx skills add zdeneklapes/skills --skill vertical-slice-architecture
 npx skills add zdeneklapes/skills --skill simplify-code
@@ -43,6 +45,7 @@ npx skills add . --list
 Install one skill locally for Codex:
 
 ```bash
+npx skills add . --skill code-comments-and-documentation -a codex -g
 npx skills add . --skill project-documentation -a codex -g
 npx skills add . --skill vertical-slice-architecture -a codex -g
 npx skills add . --skill simplify-code -a codex -g

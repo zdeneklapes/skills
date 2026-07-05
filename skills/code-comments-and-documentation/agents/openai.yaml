@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Comments and Documentation"
+  short_description: "Comment and document code for the next reader"
+  default_prompt: "Use $code-comments-and-documentation to review comments, docstrings, and API documentation in the changed code."
