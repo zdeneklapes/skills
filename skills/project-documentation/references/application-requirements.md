@@ -1,30 +1,16 @@
 # Application Requirements Reference
 
-Read this when writing, reviewing, or improving application functionality documentation, product requirements, feature checklists, product scope, roadmaps, implementation order, or acceptance criteria.
-
 Application requirements describe what the final product should do.
 
 Do not write only UI behavior. For every important capability, also describe backend rules, data ownership, constraints, and acceptance criteria.
-
-## Required Coverage
-
-Application functionality documentation must describe:
-
-1. What the system does.
-2. Who can use each capability.
-3. What is intentionally out of scope.
-4. What security and permission rules apply.
-5. How well the system must perform.
-6. What data, integrations, telemetry, and migration impacts exist.
-7. What counts as done.
 
 ## Recommended Structure
 
 Recommended files:
 
 ```text
-docs/docs/application-functionality.md
 docs/docs/requirements/
+  index.md
   00-glossary-and-scope.md
   01-public-website.md
   02-auth-billing-accounts.md
@@ -38,7 +24,7 @@ docs/docs/requirements/
 
 Use product-area names that fit the project when the example names do not.
 
-`application-functionality.md` should be the high-level index: product summary, document list, status legend, target legend, source-of-truth summary, core user journeys, supported-now summary, and roadmap summary.
+`index.md` should be the high-level index: product summary, document list, status legend, target legend, source-of-truth summary, core user journeys, supported-now summary, and roadmap summary.
 
 For full application functionality documentation, use these sections where relevant:
 
@@ -60,6 +46,10 @@ For full application functionality documentation, use these sections where relev
 ## Recommended Next Implementation Order
 ```
 
+For the security, non-functional, integrations, telemetry, and data-impact sections, see `architecture-and-cross-cutting.md`.
+
+The detailed numbered files are the canonical home for full sections; keep `index.md` as the summary index. Use the full section list in `index.md` only when it is the single requirements document.
+
 For smaller documents, keep only the sections that materially affect the product.
 
 ## Status Rules
@@ -73,16 +63,27 @@ Recommended statuses:
 * `Out of scope`: Intentionally not planned unless product strategy changes.
 * `Required`: Mandatory cross-cutting rule, usually security, privacy, reliability, or compliance.
 
-Rules:
+Do not mix current functionality with planned functionality. When changing a `Done` requirement, edit the row in place to describe the new behavior and set its status to `Planned` until the change is implemented.
 
-* Do not list intentionally rejected features as missing functionality.
-* Do not include out-of-scope items in the roadmap.
-* Do not mix current functionality with planned functionality.
-* If a competitor has a feature that the product will not support, document it as out of scope, not as missing.
+## Status-Filter Assets
+
+Requirement status tables can be filtered with shared MkDocs assets.
+
+* Put the status-filter CSS and JavaScript in `docs/docs/assets/` and use them only for requirement/status tables.
+* Filtering requires a `Status` column and the status vocabulary above, used consistently everywhere.
+* Register assets in `mkdocs.yml`; `extra_css` and `extra_javascript` paths are relative to the configured docs directory:
+
+```yaml
+extra_css:
+  - assets/status-filter.css
+
+extra_javascript:
+  - assets/status-filter.js
+```
 
 ## Domain Glossary
 
-Define a strict glossary early in the document.
+Define a strict glossary early in the document, as a table with columns `Term`, `Meaning`, and `Do not confuse with`.
 
 Use one canonical term for each domain concept and reuse it everywhere.
 
@@ -102,19 +103,9 @@ Rules:
 * If a term is user-facing and technical, state both meanings.
 * Keep the glossary short, but strict.
 
-Recommended format:
-
-```markdown
-## Domain Glossary
-
-| Term | Meaning | Do not confuse with |
-| --- | --- | --- |
-| ... | ... | ... |
-```
-
 ## Product Scope
 
-Define product boundaries before listing features.
+Define product boundaries before listing features, as a table with columns `Area`, `Status`, and `Requirement`.
 
 The scope section should answer:
 
@@ -128,37 +119,14 @@ The scope section should answer:
 Rules:
 
 * Make intentional limitations visible.
-* Do not let out-of-scope items appear later as planned work.
+* Out-of-scope items appear only here — never as missing features, planned work, roadmap items, or product boundaries. This includes competitor features the product will not support.
 * If a feature is out of scope, also state what is in scope instead.
-
-Recommended format:
-
-```markdown
-## Product Scope
-
-| Area | Status | Requirement |
-| --- | --- | --- |
-| ... | ... | ... |
-```
 
 ## Supported Now
 
 The `Supported Now` section describes only current behavior.
 
-Group current functionality by product area.
-
-Examples of possible areas:
-
-* Public Website
-* Accounts
-* Plans And Purchases
-* Access Control
-* Core Workflow
-* Workspace
-* Search
-* Reports
-* Settings
-* Admin, if applicable
+Group current functionality by product area (for example Public Website, Accounts, Plans And Purchases, Access Control, Core Workflow, Search, Reports, Settings, Admin), each area as a table with columns `Status` and `Functionality`.
 
 Rules:
 
@@ -166,16 +134,6 @@ Rules:
 * Do not describe future improvements here.
 * Do not mark something as done unless it is truly implemented.
 * Do not hide known limitations. Mention them under product boundaries or planned requirements.
-
-Recommended format:
-
-```markdown
-### Area Name
-
-| Status | Functionality |
-| --- | --- |
-| Done | ... |
-```
 
 ## Planned Requirements
 
@@ -190,9 +148,7 @@ Each requirement should answer:
 5. What is the data impact?
 6. What is the acceptance criterion?
 
-Detailed requirement files under `docs/docs/requirements/` should use stable IDs and target columns.
-
-Recommended table format:
+Detailed requirement files under `docs/docs/requirements/` should use stable IDs and target columns:
 
 ```markdown
 | ID | Status | Target | Requirement | Acceptance |
@@ -209,7 +165,6 @@ Rules:
 * Use targets like `Public Frontend`, `User Frontend`, `Admin UI`, `Backend`, `Database`, `Content`, `Integrations`, `Operations`, and `Tests`.
 * One row should describe one implementable requirement.
 * If only the UI exists but backend behavior is missing, split it into separate rows.
-* Avoid vague requirements.
 * Avoid implementation details that do not affect product behavior.
 * Include edge cases when they change behavior.
 * Include failure behavior when users could lose data, access, or trust.
@@ -217,21 +172,11 @@ Rules:
 
 ## Acceptance Criteria
 
-Acceptance criteria must be observable and testable.
-
-Do not write vague acceptance criteria such as:
-
-```markdown
-The feature works well.
-```
-
-Write criteria that can be verified by QA, automated tests, or review.
+Acceptance criteria must be observable and testable: verifiable by QA, automated tests, or review.
 
 For simple requirements, a short acceptance sentence is enough.
 
-For complex state changes, use `Given / When / Then`.
-
-Recommended format:
+For complex state changes, use `Given / When / Then`:
 
 ```markdown
 Given <initial state>,
@@ -261,7 +206,7 @@ Rules:
 
 ## Product Boundaries To Close
 
-Use this section for known gaps in existing pages or flows.
+Use this section for known gaps in existing pages or flows, as a table with columns `Status`, `Boundary`, `Requirement`, and `Acceptance`.
 
 Examples of boundary types:
 
@@ -270,25 +215,11 @@ Examples of boundary types:
 * Existing workflow has UI but no backend action.
 * Existing feature exists but lacks permissions, telemetry, or acceptance criteria.
 
-Recommended format:
-
-```markdown
-| Status | Boundary | Requirement | Acceptance |
-| --- | --- | --- | --- |
-| Planned | ... | ... | ... |
-```
-
-Rules:
-
-* Only include real current gaps.
-* Do not include out-of-scope items.
-* Use this section to prevent half-built UI from being mistaken for complete functionality.
+Only include real current gaps. Use this section to prevent half-built UI from being mistaken for complete functionality.
 
 ## Priority Roadmap
 
-Group planned work by priority.
-
-Use:
+Group planned work by priority:
 
 ```markdown
 ## Priority Roadmap
@@ -298,30 +229,13 @@ Use:
 ### Add Third
 ```
 
-Each roadmap item should include:
+Each roadmap item should include the requirement, the reason, and the expected result, as a table with columns `Status`, `Requirement`, `Reason`, and `Expected result`.
 
-* Requirement.
-* Reason.
-* Expected result.
-
-Recommended format:
-
-```markdown
-| Status | Requirement | Reason | Expected result |
-| --- | --- | --- | --- |
-| Planned | ... | ... | ... |
-```
-
-Rules:
-
-* Prioritize foundational data, permissions, and core workflows before polish.
-* Do not include out-of-scope work.
-* Do not include duplicates unless the roadmap summarizes a detailed section.
-* Security, authorization, data integrity, and migration work should not be buried as optional polish.
+Do not include duplicates unless the roadmap summarizes a detailed section.
 
 ## Recommended Implementation Order
 
-Implementation order should follow dependencies.
+Implementation order should follow dependencies, as a table with columns `Order`, `Requirement`, `Start with`, and `Output`.
 
 Prefer this order:
 
@@ -335,16 +249,9 @@ Prefer this order:
 8. Performance and reliability hardening.
 9. UI polish and productivity features.
 
-Recommended format:
-
-```markdown
-| Order | Requirement | Start with | Output |
-| ---: | --- | --- | --- |
-| 1 | ... | ... | ... |
-```
-
 Rules:
 
+* Prioritize foundational data, permissions, and core workflows before polish. Security, authorization, data integrity, and migration work must not be buried as optional polish.
 * Put shared backend logic before multiple UI features depend on it.
 * Put migration and compatibility planning before changing existing behavior.
 * Put permissions before sharing or admin workflows.

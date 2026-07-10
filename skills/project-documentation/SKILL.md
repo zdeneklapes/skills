@@ -1,13 +1,11 @@
 ---
 name: project-documentation
-description: Use when creating, reviewing, or improving project documentation structure, README files, AGENTS.md files, MkDocs docs, requirements indexes, architecture docs, ADRs, operations docs, or implementation plans. Do not use for code-only work unless documentation must change.
+description: Use when creating, reviewing, or improving project documentation structure, README files, AGENTS.md files, MkDocs docs, application functionality requirements, or architecture docs. Also use before implementing features that add, change, or remove functionality requirements. Do not use for code-only work unless documentation must change.
 ---
 
 # Project Documentation Skill
 
-Use this skill when writing, reviewing, or improving project documentation.
-
-The goal is documentation that is current, concrete, easy to navigate, rendered by MkDocs when applicable, and useful for both humans and coding agents.
+Use this skill when writing, reviewing, or improving project documentation. The goal is documentation that is current, concrete, easy to navigate, rendered by MkDocs when applicable, and useful for both humans and coding agents.
 
 ## Core Principle
 
@@ -15,16 +13,15 @@ Each document should have one clear job.
 
 Do not duplicate the same information in many places. Put full details in one canonical document and link to it from other places.
 
-After changing application logic, workflow behavior, public functionality, or functional requirements, update the relevant project documentation when the user asks for documentation, the task explicitly requires documentation, or the change clearly makes existing documented behavior inaccurate.
+Project documentation should cover both application requirements (what the application should do) and implementation details (how the code works).
 
-Do not write new documentation files for ordinary code changes unless the user asks for documentation, the task explicitly requires docs, or existing docs would become wrong without the update.
+## Requirements First
 
-Project documentation should cover both:
+Any addition, change, or removal of an application functionality requirement must be reflected in `docs/docs/requirements/` before implementation. Then implement in the Recommended Implementation Order from `references/application-requirements.md`.
 
-1. Application requirements: what the application should do.
-2. Implementation details: how the code works.
+For all other documentation (README, `AGENTS.md`, architecture), update it when the user asks for documentation, the task explicitly requires documentation, or the change clearly makes existing documented behavior inaccurate. Do not write new documentation files for ordinary code changes.
 
-Use diagrams, flowcharts, state diagrams, sequence diagrams, tables, examples, or screenshots when they make the logic easier to understand.
+Write architecture documentation only when the user or developer explicitly asks for it. Not otherwise.
 
 ## Load References
 
@@ -32,60 +29,64 @@ Read only the reference files that match the documentation task.
 
 | Task | Reference |
 | --- | --- |
-| README, `AGENTS.md`, nested `AGENTS.md`, MkDocs layout, agent docs, plans, or docs placement | `references/documentation-structure.md` |
-| Product functionality, requirements indexes, status tables, acceptance criteria, roadmap, or implementation order | `references/application-requirements.md` |
-| Architecture docs, code flows, module ownership, package choices, diagrams, or ADRs | `references/architecture-and-decisions.md` |
-| Authentication, authorization, data ownership, paid access, sharing, user-generated content, or privacy | `references/security-and-access.md` |
-| Non-functional requirements, integrations, telemetry, audit logs, migration, backward compatibility, or possible issues | `references/operations-quality-and-risk.md` |
+| Product functionality, requirements indexes, product scope, glossary, status tables, acceptance criteria, roadmap, implementation order, or status-filter tables | `references/application-requirements.md` |
+| Architecture docs, code flows, module ownership, diagrams, technical decisions, security, access, billing, sharing, user-generated content, privacy, retention, non-functional requirements, integrations, telemetry, migration, or possible issues | `references/architecture-and-cross-cutting.md` |
 
 For broad project-documentation setup or review, read every relevant reference before editing.
 
 ## Documentation Placement
 
-Use this map when deciding where documentation belongs.
-
 | File or folder | What belongs there |
 | --- | --- |
 | `README.md` | Human overview, setup, quickstart, basic commands, environment overview, and links. |
-| `AGENTS.md` | Short agent navigation guide: project purpose, paths, docs, verification, safety, and done definition. |
-| Nested `AGENTS.md` | Special local rules for one folder or subsystem. |
-| `docs/docs/application-functionality.md` | Product requirements index: what the application should do. |
-| `docs/docs/requirements/` | Detailed functionality requirements before implementation. |
-| `docs/docs/architecture/` | Current technical design: how the code works now. |
-| `docs/docs/adr/` | Decision log: important technical decisions, alternatives, and consequences. |
-| `docs/docs/agents/` | Agent-facing implementation references. |
-| `docs/docs/operations/` | Deployment, rollback, monitoring, and runbooks. |
-| `docs/docs/plans/` | Implementation plans and staged execution notes. |
-| `docs/docs/assets/` | MkDocs CSS and JavaScript assets. |
+| `AGENTS.md` (project root) | All agent-facing guidance. See Project AGENTS.md below. |
+| `docs/docs/requirements/` | Application functionality requirements and their `index.md`. |
+| `docs/docs/architecture/` | Current technical design: how the code works now. Written only on explicit request. |
+| `docs/docs/assets/` | MkDocs CSS and JavaScript for requirement status tables. |
 | Skills | Repeatable agent workflows. |
 | CI, hooks, scripts | Enforced checks. |
 
-Use `architecture/` for how the system works now. Use `adr/` for why an important technical decision was made.
+Do not create `docs/docs/agents/`, `docs/docs/adr/`, `docs/docs/operations/`, or `docs/docs/plans/` folders. Agent-facing content belongs in the root `AGENTS.md`. Record important technical decisions (why, alternatives, consequences) inside the relevant architecture page.
+
+## Project AGENTS.md
+
+Everything agent-related lives in the single project-root `AGENTS.md`. Keep it short: reference documentation folders, not every leaf file.
+
+Required sections:
+
+* Project: purpose and what must not be broken.
+* Where Things Are: paths table for code, tests, and docs.
+* Project Documentation: links to `README.md` and `docs/docs/` folders.
+* Commands: verified commands, where to run them, and what they check.
+* Testing And Verification: fast tests, full tests, lint, typecheck.
+* Update Map: files that must be updated together, and generated files with their generation commands.
+* Safety: secrets, private data, destructive commands, and risky operations.
+* Done: definition of when work is complete.
+
+Do not put long architecture text, full API docs, database schemas, old logs, generated repo dumps, duplicated README content, vague advice, unverified instructions, or secrets in `AGENTS.md`.
+
+Add nested `AGENTS.md` files only when a folder or subsystem needs special local rules. They should contain only local paths, references to relevant docs, conventions, verification pointers, and danger zones — never repeat the root file.
+
+## MkDocs
+
+* Keep docs under the configured MkDocs docs directory, for example `docs/docs/`, with navigation organized in `mkdocs.yml`.
+* Keep Markdown valid and renderable.
+* Status-filter asset rules live in `references/application-requirements.md`.
 
 ## Review Checklist
 
 Before finalizing documentation, verify:
 
-* The document has one clear job.
-* Information is not duplicated across README, AGENTS, requirements, architecture, ADR, operations, and agent docs.
-* README is human-facing.
-* `AGENTS.md` is short and links to deeper docs.
-* Requirements use stable IDs, statuses, targets, and testable acceptance criteria.
-* Architecture docs describe how the code works now.
-* ADRs explain why important technical decisions were made.
+* The Core Principle holds: one job per document, no duplicated information.
+* Requirement changes are reflected in `docs/docs/requirements/` before implementation, with formats matching the loaded references.
 * MkDocs navigation and assets are updated when pages or assets change.
-* Security, permissions, data access, integrations, migrations, and possible issues are documented when they affect the feature.
-* The document stays concrete, current, and easy to scan.
 
 ## Writing Style
 
 Be clear and direct.
 
-Rules:
-
-* Use exact paths, exact commands, stable IDs, tables, and diagrams when useful.
+* Use exact paths, exact commands, stable IDs, tables, diagrams, flowcharts, sequence diagrams, examples, or screenshots when they make the logic easier to understand.
 * Prefer measurable requirements over vague adjectives.
 * Use one canonical term from the glossary.
 * Avoid too many concrete examples.
 * Avoid outdated notes, old logs, and implementation details unless they affect behavior, security, data, or delivery risk.
-* Keep the skill lean by including only rules that change product behavior, implementation decisions, testing, security, or operational readiness.
