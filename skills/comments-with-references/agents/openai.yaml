@@ -1,0 +1,4 @@
+interface:
+  display_name: "Comment References"
+  short_description: "Document non-obvious code decisions with sources"
+  default_prompt: "Use $comments-with-references to add an authoritative source to a non-obvious code comment."
