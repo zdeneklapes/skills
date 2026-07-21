@@ -1,6 +1,6 @@
 ---
 name: python-development
-description: Use when writing, reviewing, refactoring, or testing Python code; choosing Pydantic/dataclass/TypedDict structures; defining Python exceptions; or applying Python naming, branching, typing, pytest, tooling-discovery, or logging conventions. Do not use for non-Python changes.
+description: Use when writing, reviewing, refactoring, or testing Python code; defining Python exceptions; or applying Python naming, branching, pytest, tooling-discovery, or logging conventions. Do not use for non-Python changes.
 ---
 
 # Python Development
@@ -9,20 +9,9 @@ Use this for reusable Python coding and testing conventions.
 
 First follow the project's own instructions for Python version, execution environment, dependency manager, framework, formatter, linter, type checker, test runner, and command wrappers.
 
-## Structured Data
+## Types, Structures, and Models
 
-Use the project's established structured-data patterns.
-
-Avoid broad fixed-shape annotations like `dict[str, Any]`, `dict[str, object]`, or `list[dict[...]]`.
-
-Use:
-
-- Pydantic models when the project already uses Pydantic or the data needs validation, serialization, schema generation, or boundary parsing.
-- Dataclasses for internal runtime/helper data that does not need validation, serialization, or schema behavior.
-- `TypedDict` for plain-dict wire shapes required by third-party APIs.
-- Named type aliases or short comments for genuinely dynamic mappings.
-
-For Pydantic-vs-dataclass-vs-`TypedDict` decisions, read [structure-and-models.md](references/structure-and-models.md).
+For type design, data structures, validation, type checking, adapters, and typed tests, read [structure-and-models.md](references/structure-and-models.md).
 
 ## Exceptions
 
@@ -41,12 +30,6 @@ Keep simple priority-ordered guard clauses as `if` statements.
 ## Reuse Results
 
 If the same function result is needed more than once, call it once, store it in a descriptive variable, and reuse it.
-
-## Closed String Values
-
-When a string accepts only known values, avoid plain `str`.
-
-Prefer an enum for reusable domain values or a `Literal[...]` alias for local closed sets.
 
 ## Variable Names
 
@@ -90,14 +73,6 @@ Test core logic and user-visible behavior.
 Do not test incidental implementation mechanics such as import side effects, `sys.modules`, import cache state, exact log text, or whether a transitive import happened.
 
 Do not add tests for behavior that is not implemented, removed, or absent from the public surface.
-
-### Use Real Production Types
-
-Use real production types in tests.
-
-Do not create minimal stand-in classes that mimic production models.
-
-If a real type is heavy to construct, use a pytest fixture or factory, not a stripped-down copy.
 
 ### Config Fixtures
 
@@ -150,18 +125,6 @@ Prefer project-provided commands and docs first: `just`, `make`, scripts, `tox`,
 Use the environment manager already present in the project, such as `uv`, Poetry, Hatch, PDM, `tox`, `nox`, an activated virtualenv, container commands, or system Python.
 
 Do not introduce or bypass an environment manager just for convenience.
-
-### Type Checking
-
-Run type checks after type-related changes.
-
-Fix real type mismatches in project code instead of suppressing them.
-
-Use narrow line-level ignores only for dynamic third-party libraries or weak stubs.
-
-Do not disable type rules globally to hide local errors.
-
-Avoid `typing.cast` when possible. Prefer real narrowing with runtime validation, `TypeGuard`, `TypeIs`, protocols, or clearer control flow.
 
 ### Linting and Formatting
 
