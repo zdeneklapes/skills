@@ -1,4 +1,4 @@
 interface:
   display_name: "Project Documentation"
-  short_description: "Structure project documentation"
+  short_description: "Write and review project documentation"
   default_prompt: "Use $project-documentation to write or review project documentation."
