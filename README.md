@@ -9,6 +9,7 @@ A small collection of agent skills installable with the `skills` CLI and discove
 | [code-comments-and-documentation](skills/code-comments-and-documentation) | Write self-explaining code with comments, docstrings, and API docs that capture intent, invariants, and contracts. |
 | [comments-with-references](skills/comments-with-references) | Write focused inline comments that explain non-obvious decisions and cite authoritative sources. |
 | [project-documentation](skills/project-documentation) | Write and review README, AGENTS, requirements, architecture, ADR, and runbook documentation. |
+| [owasp-security-review](skills/owasp-security-review) | Audit and harden application security against OWASP Top 10 risks. |
 | [writing-plans](skills/writing-plans) | Create detailed, testable implementation plans with explicit edge-case verification. |
 | [shell-skill](skills/shell-skill) | Write and review explicit env-driven shell scripts, cron scripts, and helper wrappers. |
 | [simplify-code](skills/simplify-code) | Refactor recently changed or targeted code for clarity while preserving behavior. |
@@ -31,6 +32,7 @@ Install one skill by name:
 npx skills add zdeneklapes/skills --skill code-comments-and-documentation
 npx skills add zdeneklapes/skills --skill comments-with-references
 npx skills add zdeneklapes/skills --skill project-documentation
+npx skills add zdeneklapes/skills --skill owasp-security-review
 npx skills add zdeneklapes/skills --skill writing-plans
 npx skills add zdeneklapes/skills --skill vertical-slice-architecture
 npx skills add zdeneklapes/skills --skill simplify-code
@@ -54,6 +56,7 @@ Install one skill locally for Codex:
 npx skills add . --skill code-comments-and-documentation -a codex -g
 npx skills add . --skill comments-with-references -a codex -g
 npx skills add . --skill project-documentation -a codex -g
+npx skills add . --skill owasp-security-review -a codex -g
 npx skills add . --skill writing-plans -a codex -g
 npx skills add . --skill vertical-slice-architecture -a codex -g
 npx skills add . --skill simplify-code -a codex -g

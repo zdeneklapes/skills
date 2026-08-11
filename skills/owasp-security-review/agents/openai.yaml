@@ -1,0 +1,4 @@
+interface:
+  display_name: "OWASP Security Review"
+  short_description: "Audit and harden OWASP security controls"
+  default_prompt: "Use $owasp-security-review to audit and harden this application against relevant OWASP risks."
